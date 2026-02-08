@@ -48,6 +48,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 43.6532, lng: -79.3832 }, // Default set to toronto
         zoom: 13,
+        mapID: "377473d33855fc722a4cd249"
     });
 }
 
