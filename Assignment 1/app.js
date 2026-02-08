@@ -70,3 +70,19 @@ const infoWindow = new google.maps.InfoWindow({
 marker.addListener("click", () => {
     infoWindow.open(map, marker);
 });
+
+// add handle for submission and updates the ui
+document.getElementById('landmark-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const desc = document.getElementById('description').value;
+    const lat = document.getElementById('lat').value;
+    const lng = document.getElementById('lng').value;
+
+    const newLandmark = createLandmarkObject(title, desc, lat, lng, currentImageBlob);
+    landmarks.push(newLandmark);
+    placeMarker(newLandmark);
+
+    e.target.reset();
+    document.getElementById('preview-image').style.display = 'none';
+});
