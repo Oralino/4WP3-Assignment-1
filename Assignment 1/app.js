@@ -60,6 +60,21 @@ function placeMarker(landmark) {
         title: landmark.title
     });
     landmark.markerRef = marker;
+    //logic to view marker data
+    const infoWindow = new google.maps.InfoWindow({
+        content: `
+            <div style="width: 200px;">
+                <h3 style="margin: 0 0 5px 0;">${landmark.title}</h3>
+                ${landmark.image ? `<img src="${landmark.image}" style="width:100%; height:auto; border-radius: 4px;">` : ''}
+                <p style="margin: 5px 0;">${landmark.description}</p>
+            </div>
+        `
+    });
+
+    //Add Click Listener
+    marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+    });
 }
 
 // add handle for submission and updates the ui
@@ -73,12 +88,23 @@ document.getElementById('landmark-form').addEventListener('submit', (e) => {
     const newLandmark = createLandmarkObject(title, desc, lat, lng, currentImageBlob);
     landmarks.push(newLandmark);
     placeMarker(newLandmark); 
-    //logic for saving to localstorage
-    localStorage.setItem('myLandmarks', JSON.stringify(landmarks));
+
+    saveData();
 
     e.target.reset();
     document.getElementById('preview-image').style.display = 'none';
 });
+
+function saveData() {
+    const safeData = landmarks.map(l => ({
+        id: l.id,
+        title: l.title,
+        description: l.description,
+        location: l.location,
+        image: l.image
+    }));
+    localStorage.setItem('myLandmarks', JSON.stringify(safeData));
+}
 
 
 
