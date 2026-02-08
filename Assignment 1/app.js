@@ -18,7 +18,6 @@ document.getElementById('photo-input').addEventListener('change', function(e) {
 
 //landmark storage and data object
 let landmarks = [];
-
 function createLandmarkObject(title, desc, lat, lng, image) {
     return {
         id: Date.now(),
@@ -50,6 +49,26 @@ function initMap() {
         zoom: 13,
         mapID: "377473d33855fc722a4cd249"
     });
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const userPos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+                
+                //Move map to user
+                map.setCenter(userPos);
+            },
+            () => {
+                //If user blocks location throw error in console log and default to center(toronto)
+                console.log("Location access denied or failed.");
+            }
+        );
+    }
+
+    loadSaved();
 }
 
 //logic to place markers on map
@@ -98,6 +117,7 @@ document.getElementById('landmark-form').addEventListener('submit', (e) => {
     document.getElementById('preview-image').style.display = 'none';
 });
 
+//saves the user data in a localstorage
 function saveData() {
     const safeData = landmarks.map(l => ({
         id: l.id,
