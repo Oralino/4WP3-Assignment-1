@@ -67,6 +67,9 @@ function placeMarker(landmark) {
                 <h3 style="margin: 0 0 5px 0;">${landmark.title}</h3>
                 ${landmark.image ? `<img src="${landmark.image}" style="width:100%; height:auto; border-radius: 4px;">` : ''}
                 <p style="margin: 5px 0;">${landmark.description}</p>
+                <button onclick="removeLandmark(${landmark.id})" style="background: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer; border-radius: 4px; width: 100%;">
+                    Delete Pin
+                </button>
             </div>
         `
     });
@@ -118,3 +121,28 @@ function loadSaved() {
         });
     }
 }
+
+
+//deletes landmark
+window.removeLandmark = function(id) {
+    //finds the landmark in the list
+    const index = landmarks.findIndex(l => l.id === id);
+    
+    if (index > -1) {
+        //remove the pin from the map
+        landmarks[index].markerRef.setMap(null);
+        
+        //remove the data from the array
+        landmarks.splice(index, 1);
+        
+        //update Local Storage
+        const safeData = landmarks.map(l => ({
+            id: l.id,
+            title: l.title,
+            description: l.description,
+            location: l.location,
+            image: l.image
+        }));
+        localStorage.setItem('myLandmarks', JSON.stringify(safeData));
+    }
+};
