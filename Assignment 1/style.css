@@ -82,10 +82,12 @@ body, html {
         box-sizing: border-box;
     }
     #preview-image{
-    display:none; 
-    max-width: 50%; 
-    margin-top: 10px; 
-    margin-bottom: 10px;
+        display:none; 
+        max-width: 50%; 
+        margin-top: 10px; 
+    }
+    #photo-group{
+        padding-bottom: 10px;
     }
 
     /*map takes up top half of screen */
@@ -111,6 +113,9 @@ body, html {
     
     .sidebar-hidden #map-container {
         height: calc(100% - 40px) !important;
+    }
+    #landmark-title{
+    margin-bottom: 5px;
     }
 }
 
@@ -139,11 +144,18 @@ body, html {
     .sidebar-hidden #sidebar {
     display: none !important; 
 }
-
 #preview-image{
     display:none; 
     max-width: 50%; 
     margin-top: 10px; 
-    margin-bottom: 10px;
+}
+#photo-group{
+    padding-bottom: 10px;
+}
+#landmark-title{
+    margin-bottom: 5px;
+}
+#lat{
+    margin-bottom: 5px;
 }
 }
