@@ -28,3 +28,16 @@ function createLandmarkObject(title, desc, lat, lng, image) {
         image: image
     };
 }
+
+
+// Geolocation API
+document.getElementById('geo-btn').addEventListener('click', () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(pos => {
+            document.getElementById('lat').value = pos.coords.latitude;
+            document.getElementById('lng').value = pos.coords.longitude;
+        });
+    } else {
+        alert("Geolocation not supported");
+    }
+});
