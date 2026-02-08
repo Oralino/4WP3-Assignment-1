@@ -213,11 +213,11 @@ function renderList() {
 document.getElementById('toggle-sidebar-mobile').addEventListener('click', () => {
     document.body.classList.toggle('sidebar-hidden');
     // Change Button Text based on state
-    const btn = document.getElementById('toggle-sidebar-mobile');
+    const btn = document.getElementById('sidebar-mobile-style');
     const isHidden = document.body.classList.contains('sidebar-hidden');
     
     if (window.innerWidth <= 768) {
-        btn.innerText = isHidden ? "⬆ Show List" : "⬇ Full Map";
+        btn.textContent = isHidden ? "⬆ Show List" : "⬇ Full Map";
     }
     //google maps resize
     setTimeout(() => {

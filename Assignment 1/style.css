@@ -2,7 +2,9 @@
 body, html { 
     height: 100%; 
     margin: 0; 
-    font-family: sans-serif;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #333;
+    -webkit-font-smoothing: antialiased;
     display: flex; 
     flex-direction: column; 
 }
@@ -12,6 +14,7 @@ body, html {
     display: flex; 
     flex: 1;
     height: 100%;
+    overflow: hidden;
 }
 
 /* sidebar styling */
@@ -21,6 +24,7 @@ body, html {
     background: #f4f4f4; 
     overflow-y: auto; 
 }
+
 
 /* map container styling*/
 #map-container { 
@@ -32,6 +36,7 @@ body, html {
     height: 100%; 
     background-color: grey; 
 }
+
 
 
 /* landmark list styling*/
@@ -99,16 +104,19 @@ body, html {
     display: none;
     }
     #toggle-sidebar-mobile {
-        position: absolute;
-        right: 10px;
-        background: white;
-        color: black;
-        border: 1px solid #ccc;
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: end;
+
     }
     .sidebar-hidden #sidebar {
         height: 10px !important; 
         overflow: hidden;
+    }
+    #sidebar-mobile-style{
+        color: black;
+        border: 1px solid #ccc;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+
     }
     
     .sidebar-hidden #map-container {
@@ -117,45 +125,95 @@ body, html {
     #landmark-title{
     margin-bottom: 5px;
     }
+    input[type="text"], 
+    input[type="number"] {
+        width: 100%;
+        padding: 8px 12px; 
+        margin-bottom: 8px;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        box-sizing: border-box;
+        font-size: 14px; 
+        -webkit-appearance: none;
+        appearance: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input[type="text"]:focus, 
+    input[type="number"]:focus {
+        outline: none;
+        border-color: #007bff;
+        background: #ffffff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+    }
+
+    #landmark-title {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 2px;
+        font-size: 13px;
+        color: #333;
+    }
+
 }
 
 /*desktop sidebar*/
 @media (min-width: 769px) {
-#toggle-sidebar-mobile {
-    display: none;
-}
-#toggle-sidebar-desktop {
-    position: absolute;
-    top: 60px;
-    left: 10px;
-    z-index: 1000;
-    background: white;
-    border: 1px solid #999;
-    padding: 8px 12px;
-    font-size: 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
+    #toggle-sidebar-mobile {
+        display: none;
+    }
+    #toggle-sidebar-desktop {
+        position: absolute;
+        top: 60px;
+        left: 10px;
+        z-index: 1000;
+        background: white;
+        border: 1px solid #999;
+        padding: 8px 12px;
+        font-size: 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
 
-    #toggle-sidebar-desktop:hover {
-        background: #f0f0f0;
-        }
-    .sidebar-hidden #sidebar {
-    display: none !important; 
-}
-#preview-image{
-    display:none; 
-    max-width: 50%; 
-    margin-top: 10px; 
-}
-#photo-group{
-    padding-bottom: 10px;
-}
-#landmark-title{
-    margin-bottom: 5px;
-}
-#lat{
-    margin-bottom: 5px;
-}
+        #toggle-sidebar-desktop:hover {
+            background: #f0f0f0;
+            }
+        .sidebar-hidden #sidebar {
+        display: none !important; 
+    }
+    #preview-image{
+        display:none; 
+        max-width: 50%; 
+        margin-top: 10px; 
+    }
+    #photo-group{
+        padding-bottom: 10px;
+    }
+    #landmark-title{
+        margin-bottom: 5px;
+    }
+    #lat{
+        margin-bottom: 5px;
+    }
+    input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    transition: border 0.2s;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus {
+        outline: none;
+        border-color: #007bff;
+        background: #fdfdfd;
+    }
+
+    #landmark-title {
+        font-weight: bold;
+    }
 }
