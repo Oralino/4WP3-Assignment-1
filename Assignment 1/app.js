@@ -208,3 +208,29 @@ function renderList() {
         list.appendChild(li);
     });
 }
+
+//mobile sidebar logic
+document.getElementById('toggle-sidebar-mobile').addEventListener('click', () => {
+    document.body.classList.toggle('sidebar-hidden');
+    // Change Button Text based on state
+    const btn = document.getElementById('toggle-sidebar-mobile');
+    const isHidden = document.body.classList.contains('sidebar-hidden');
+    
+    if (window.innerWidth <= 768) {
+        btn.innerText = isHidden ? "⬆ Show List" : "⬇ Full Map";
+    }
+    //google maps resize
+    setTimeout(() => {
+        google.maps.event.trigger(map, "resize");
+    }, 300);
+});
+
+
+//desktop sidebar logic
+document.getElementById('toggle-sidebar-desktop').addEventListener('click', () => {
+    document.body.classList.toggle('sidebar-hidden');
+    //google maps resize
+    setTimeout(() => {
+        google.maps.event.trigger(map, "resize");
+    }, 300);
+});
