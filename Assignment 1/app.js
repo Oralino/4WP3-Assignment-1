@@ -18,6 +18,7 @@ document.getElementById('photo-input').addEventListener('change', function(e) {
 
 //landmark storage and data object
 let landmarks = [];
+
 function createLandmarkObject(title, desc, lat, lng, image) {
     return {
         id: Date.now(),
@@ -32,12 +33,14 @@ function createLandmarkObject(title, desc, lat, lng, image) {
 // Geolocation API
 document.getElementById('geo-btn').addEventListener('click', () => {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(pos => {
-            document.getElementById('lat').value = pos.coords.latitude;
-            document.getElementById('lng').value = pos.coords.longitude;
-        });
-    } else {
-        alert("Geolocation not supported");
+
+        //gets location
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                document.getElementById('lat').value = pos.coords.latitude;
+                document.getElementById('lng').value = pos.coords.longitude;
+            },
+        );
     }
 });
 
@@ -112,12 +115,13 @@ document.getElementById('landmark-form').addEventListener('submit', (e) => {
     placeMarker(newLandmark); 
 
     saveData();
+    renderList();
 
     e.target.reset();
     document.getElementById('preview-image').style.display = 'none';
 });
 
-//saves the user data in a localstorage
+//saves the user data
 function saveData() {
     const safeData = landmarks.map(l => ({
         id: l.id,
@@ -139,6 +143,7 @@ function loadSaved() {
             landmarks.push(l);
             placeMarker(l);
         });
+        renderList();
     }
 }
 
@@ -164,5 +169,42 @@ window.removeLandmark = function(id) {
             image: l.image
         }));
         localStorage.setItem('myLandmarks', JSON.stringify(safeData));
+        renderList();
     }
 };
+
+
+//Render the sidebar list
+function renderList() {
+    const list = document.getElementById('landmark-list');
+    list.innerHTML = '';
+
+    landmarks.forEach(l => {
+        //Create the list item
+        const li = document.createElement('li');
+        li.className = 'landmark-item';
+        li.innerHTML = `<span>${l.title}</span>`;
+
+        //Will send user to the landmark when they click the landmark on the sidebar
+        li.addEventListener('click', () => {
+            map.panTo(l.location);
+            map.setZoom(15);
+            //Trigger the click on the map marker to open the popup
+            google.maps.event.trigger(l.markerRef, 'click');
+        });
+
+        //Create Delete Button
+        const delBtn = document.createElement('button');
+        delBtn.innerText = 'Delete';
+        delBtn.className = 'delete-btn-list';
+        
+        //Delete event
+        delBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            removeLandmark(l.id);
+        });
+
+        li.appendChild(delBtn);
+        list.appendChild(li);
+    });
+}

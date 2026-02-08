@@ -32,3 +32,43 @@ body, html {
     height: 100%; 
     background-color: grey; 
 }
+
+
+
+#landmark-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.landmark-item {
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s;
+}
+
+.landmark-item:hover {
+    background: #e9e9e9;
+    border-color: #ccc;
+}
+
+.delete-btn-list {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.delete-btn-list:hover {
+    background: #cc0000;
+}
