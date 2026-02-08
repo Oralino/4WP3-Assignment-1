@@ -69,3 +69,22 @@ body, html {
 .delete-btn-list:hover {
     background: #cc0000;
 }
+
+/*mobile view*/
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column-reverse;
+    }
+    /*sidebar takes up bottom half of screen */
+    #sidebar {
+        width: 100%;
+        height: 50%;
+        box-sizing: border-box;
+    }
+
+    /*map takes up top half of screen */
+    #map-container {
+        width: 100%;
+        height: 50%;
+    }
+}
