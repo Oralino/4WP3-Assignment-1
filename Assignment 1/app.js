@@ -59,17 +59,23 @@ function placeMarker(landmark) {
         map: map,
         title: landmark.title
     });
-    landmark.markerRef = marker; 
+    landmark.markerRef = marker;
+
+    const infoWindow = new google.maps.InfoWindow({
+        content: `
+            <div style="width:200px">
+                <h3>${landmark.title}</h3>
+                <img src="${landmark.image}" style="width:100%">
+                <p>${landmark.description}</p>
+                <button onclick="removeLandmark(${landmark.id})" style="background:red; color:white; margin-top:5px;">Delete</button>
+            </div>
+        `
+    });
+
+    marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+    });
 }
-
-//Inside placeMarker function
-const infoWindow = new google.maps.InfoWindow({
-    content: `<h3>${landmark.title}</h3><img src="${landmark.image}" width="150"><p>${landmark.description}</p>`
-});
-
-marker.addListener("click", () => {
-    infoWindow.open(map, marker);
-});
 
 // add handle for submission and updates the ui
 document.getElementById('landmark-form').addEventListener('submit', (e) => {
@@ -86,3 +92,18 @@ document.getElementById('landmark-form').addEventListener('submit', (e) => {
     e.target.reset();
     document.getElementById('preview-image').style.display = 'none';
 });
+
+
+//logic for saving to localstorage
+localStorage.setItem('myLandmarks', JSON.stringify(landmarks));
+
+// Load on init
+function loadSaved() {
+    const saved = JSON.parse(localStorage.getItem('myLandmarks'));
+    if(saved) {
+        saved.forEach(l => {
+            landmarks.push(l);
+            placeMarker(l);
+        });
+    }
+}
