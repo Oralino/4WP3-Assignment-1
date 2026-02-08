@@ -41,3 +41,31 @@ document.getElementById('geo-btn').addEventListener('click', () => {
         alert("Geolocation not supported");
     }
 });
+
+//sets google maps
+let map;
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 43.6532, lng: -79.3832 }, // Default set to toronto
+        zoom: 13,
+    });
+}
+
+//logic to place markers on map
+function placeMarker(landmark) {
+    const marker = new google.maps.Marker({
+        position: landmark.location,
+        map: map,
+        title: landmark.title
+    });
+    landmark.markerRef = marker; 
+}
+
+//Inside placeMarker function
+const infoWindow = new google.maps.InfoWindow({
+    content: `<h3>${landmark.title}</h3><img src="${landmark.image}" width="150"><p>${landmark.description}</p>`
+});
+
+marker.addListener("click", () => {
+    infoWindow.open(map, marker);
+});
