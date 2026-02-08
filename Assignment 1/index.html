@@ -12,16 +12,24 @@
         <div id="sidebar">
             <button id="toggle-sidebar-mobile" type="button">⬇ Full Map</button>
             <form id="landmark-form">
+                <div>
+                    <h1>Remember Your Landmarks!</h1>
+                    <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+                </div>
                 
                 <div class="input-group">
                     <label>Upload Photo</label>
                     <input type="file" id="photo-input" accept="image/*" required>
-                    <img id="preview-image" style="display:none; max-width: 100%; margin-top: 10px;">
+                    <img id="preview-image">
                 </div>
-
-                <input type="text" id="title" placeholder="Landmark Name" required>
-                <textarea id="description" placeholder="Description (1-3 sentences)" rows="3" required></textarea>
-
+                <div>
+                    <input type="text" id="title" placeholder="Landmark Name" required>
+                    
+                </div>
+                <div>
+                    <textarea id="description" placeholder="Description (1-3 sentences)" rows="3" required></textarea>
+                </div>
+                
                 <div class="coords-input">
                     <input type="number" id="lat" step="any" placeholder="Latitude" required>
                     <input type="number" id="lng" step="any" placeholder="Longitude" required>

@@ -81,6 +81,12 @@ body, html {
         height: 50%;
         box-sizing: border-box;
     }
+    #preview-image{
+    display:none; 
+    max-width: 50%; 
+    margin-top: 10px; 
+    margin-bottom: 10px;
+    }
 
     /*map takes up top half of screen */
     #map-container {
@@ -132,5 +138,12 @@ body, html {
         }
     .sidebar-hidden #sidebar {
     display: none !important; 
+}
+
+#preview-image{
+    display:none; 
+    max-width: 50%; 
+    margin-top: 10px; 
+    margin-bottom: 10px;
 }
 }
