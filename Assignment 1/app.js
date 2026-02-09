@@ -32,20 +32,17 @@ function createLandmarkObject(title, desc, lat, lng, image) {
 
 // Geolocation API
 document.getElementById('geo-btn').addEventListener('click', () => {
-    if (navigator.geolocation) {
-
-        //gets location
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                document.getElementById('lat').value = pos.coords.latitude;
-                document.getElementById('lng').value = pos.coords.longitude;
-            },
-        );
+    if (currentUserLocation) {
+        document.getElementById('lat').value = currentUserLocation.lat;
+        document.getElementById('lng').value = currentUserLocation.lng;
+    } else {
+        alert("Location not found or permission denied.");
     }
 });
 
 //sets google maps
 let map;
+let currentUserLocation = null;
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 43.6532, lng: -79.3832 }, // Default set to toronto
@@ -56,13 +53,12 @@ function initMap() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                const userPos = {
+                currentUserLocation = {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
                 };
-                
                 //Move map to user
-                map.setCenter(userPos);
+                map.setCenter(currentUserLocation);
             },
             () => {
                 //If user blocks location throw error in console log and default to center(toronto)
