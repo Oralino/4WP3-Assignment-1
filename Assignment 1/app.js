@@ -101,7 +101,7 @@ function placeMarker(landmark) {
 // add handle for submission and updates the ui
 document.getElementById('landmark-form').addEventListener('submit', (e) => {
     e.preventDefault();
-    const title = document.getElementById('title').value;
+    const title = document.getElementById('landmark').value;
     const desc = document.getElementById('description').value;
     const lat = document.getElementById('lat').value;
     const lng = document.getElementById('lng').value;
